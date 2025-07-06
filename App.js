@@ -1,166 +1,44 @@
-import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  ImageBackground,
-  TouchableOpacity,
-  Platform,
-  KeyboardAvoidingView,
-  Keyboard,
-  TouchableWithoutFeedback,
-  ScrollView,
-} from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
+import * as Font from 'expo-font';
+import LoginScreen from './screens/auth/LoginScreen';
+import RegisterScreen from './screens/auth/RegisterScreen';
 
-import { LinearGradient } from 'expo-linear-gradient';
-
-const initialState = {
-  email: '',
-  password: '',
-};
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  const [state, setState] = useState(initialState);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  const keyboardHide = () => {
-    Keyboard.dismiss();
-    console.log(state);
-    setState(initialState);
-  };
+  useEffect(() => {
+    async function loadFonts() {
+      try {
+        await Font.loadAsync({
+          'Montserrat-Regular': require('./assets/fonts/Lora-Regular.ttf'),
+        });
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setFontsLoaded(true);
+      }
+    }
+    loadFonts();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return <View style={{ flex: 1, backgroundColor: '#fff' }} />;
+  }
 
   return (
-    <TouchableWithoutFeedback onPress={keyboardHide}>
-      <LinearGradient
-        colors={['#2A7B9B', '#57C785', '#EDDD53']}
-        style={styles.container}
-      >
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 0}
-        >
-          <ImageBackground style={styles.image} resizeMode="cover">
-            <ScrollView
-              contentContainerStyle={styles.scroll}
-              keyboardShouldPersistTaps="handled"
-            >
-              <View style={styles.form}>
-                <View style={styles.header}>
-                  <Text style={styles.headerTitle}>Hello hello</Text>
-                  <Text style={styles.headerTitle}>Welcome back</Text>
-                </View>
-                <View>
-                  <Text style={styles.inputTitle}>EMAIL ADDRESS</Text>
-                  <TextInput
-                    style={styles.input}
-                    textAlign="center"
-                    secureTextEntry
-                    placeholder="Enter email"
-                    placeholderTextColor="#ccc"
-                    onFocus={() => {}}
-                    value={state.email}
-                    onChangeText={(value) =>
-                      setState((prevState) => ({
-                        ...prevState,
-                        email: value,
-                      }))
-                    }
-                  />
-                </View>
-
-                <View style={{ marginTop: 20 }}>
-                  <Text style={styles.inputTitle}>PASSWORD</Text>
-                  <TextInput
-                    style={styles.input}
-                    textAlign="center"
-                    secureTextEntry
-                    placeholder="Enter password"
-                    placeholderTextColor="#ccc"
-                    onFocus={() => {}}
-                    value={state.password}
-                    onChangeText={(value) =>
-                      setState((prevState) => ({
-                        ...prevState,
-                        password: value,
-                      }))
-                    }
-                  />
-                </View>
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  style={styles.btn}
-                  onPress={keyboardHide}
-                >
-                  <Text style={styles.btnTitle}>SIGN IN</Text>
-                </TouchableOpacity>
-              </View>
-            </ScrollView>
-          </ImageBackground>
-        </KeyboardAvoidingView>
-      </LinearGradient>
-    </TouchableWithoutFeedback>
+    <>
+      {/* <LoginScreen onLayoutRootView={onLayoutRootView} /> */}
+      <RegisterScreen onLayoutRootView={onLayoutRootView} />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scroll: {
-    flexGrow: 1,
-    justifyContent: 'flex-end',
-  },
-  image: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#006400',
-    height: 40,
-    borderRadius: 6,
-    color: '#ffffff',
-    paddingHorizontal: 10,
-  },
-  form: {
-    marginHorizontal: 40,
-    paddingBottom: 50,
-  },
-  inputTitle: {
-    color: '#006400',
-    marginBottom: 10,
-    fontSize: 18,
-  },
-  btn: {
-    borderRadius: 6,
-    borderWidth: 1,
-    height: 40,
-    marginTop: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 20,
-    ...Platform.select({
-      ios: {
-        backgroundColor: 'transparent',
-        borderColor: '#1e90ff',
-      },
-      android: {
-        backgroundColor: '#2e8b57',
-        borderColor: 'transparent',
-      },
-    }),
-  },
-  btnTitle: {
-    color: Platform.OS === 'ios' ? '#1e90ff' : '#ffffff',
-    fontSize: 18,
-  },
-  header: {
-    alignItems: 'center',
-    marginBottom: 60,
-  },
-  headerTitle: {
-    fontSize: 30,
-    color: '#006400',
-  },
-});

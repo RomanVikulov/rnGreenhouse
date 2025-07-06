@@ -12,11 +12,14 @@
     "@babel/runtime": "^7.27.6",
     "expo": "~53.0.17",
     "expo-linear-gradient": "~14.1.5",
+    "expo-splash-screen": "~0.30.10",
     "react": "19.0.0",
     "react-native": "0.79.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@react-native-community/cli": "^18.0.0",
+    "expo-module-scripts": "^4.1.9"
   },
   "private": true
 }

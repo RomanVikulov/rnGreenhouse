@@ -3,7 +3,7 @@
     "name": "reactNativeGreenhouse",
     "slug": "reactNativeGreenhouse",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
