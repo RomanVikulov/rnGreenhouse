@@ -1,11 +1,15 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 import LoginScreen from './screens/auth/LoginScreen';
 import RegisterScreen from './screens/auth/RegisterScreen';
 
 SplashScreen.preventAutoHideAsync();
+
+const AuthStack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -36,9 +40,21 @@ export default function App() {
   }
 
   return (
-    <>
-      {/* <LoginScreen onLayoutRootView={onLayoutRootView} /> */}
-      <RegisterScreen onLayoutRootView={onLayoutRootView} />
-    </>
+    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+      <NavigationContainer>
+        <AuthStack.Navigator>
+          <AuthStack.Screen
+            options={{ headerShown: false }}
+            name="Login"
+            component={LoginScreen}
+          />
+          <AuthStack.Screen
+            options={{ headerShown: false }}
+            name="Register"
+            component={RegisterScreen}
+          />
+        </AuthStack.Navigator>
+      </NavigationContainer>
+    </View>
   );
 }

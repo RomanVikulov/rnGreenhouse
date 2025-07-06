@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,6 +11,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   ScrollView,
+  Button,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -19,7 +20,8 @@ const initialState = {
   password: '',
 };
 
-export default function LoginScreen({ onLayoutRootView }) {
+export default function LoginScreen({ onLayoutRootView, navigation }) {
+  console.log('navigation', navigation);
   const [state, setState] = useState(initialState);
 
   const keyboardHide = () => {
@@ -83,6 +85,26 @@ export default function LoginScreen({ onLayoutRootView }) {
                   onPress={keyboardHide}
                 >
                   <Text style={styles.btnTitle}>SIGN IN</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('Register')}
+                  style={{
+                    marginTop: 20,
+                    alignSelf: 'center',
+                  }}
+                >
+                  <Text style={{ color: '#fff' }}>
+                    New to application?{' '}
+                    <Text
+                      style={{
+                        fontSize: 20,
+                        color: '#ff1493',
+                      }}
+                    >
+                      Sign Up
+                    </Text>
+                  </Text>
                 </TouchableOpacity>
               </View>
             </ScrollView>
