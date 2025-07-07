@@ -1,18 +1,25 @@
 import { useState, useEffect, useCallback } from 'react';
 import { View } from 'react-native';
+
 import * as SplashScreen from 'expo-splash-screen';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
-import LoginScreen from './screens/auth/LoginScreen';
-import RegisterScreen from './screens/auth/RegisterScreen';
+
+import { NavigationContainer } from '@react-navigation/native';
+
+import { useRoute } from './router';
 
 SplashScreen.preventAutoHideAsync();
 
-const AuthStack = createStackNavigator();
-
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  const routing = useRoute(true, onLayoutRootView);
 
   useEffect(() => {
     async function loadFonts() {
@@ -29,32 +36,9 @@ export default function App() {
     loadFonts();
   }, []);
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
   if (!fontsLoaded) {
     return <View style={{ flex: 1, backgroundColor: '#fff' }} />;
   }
 
-  return (
-    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <NavigationContainer>
-        <AuthStack.Navigator>
-          <AuthStack.Screen
-            options={{ headerShown: false }}
-            name="Login"
-            component={LoginScreen}
-          />
-          <AuthStack.Screen
-            options={{ headerShown: false }}
-            name="Register"
-            component={RegisterScreen}
-          />
-        </AuthStack.Navigator>
-      </NavigationContainer>
-    </View>
-  );
+  return <NavigationContainer>{routing}</NavigationContainer>;
 }

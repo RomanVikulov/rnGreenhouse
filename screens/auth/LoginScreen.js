@@ -39,7 +39,7 @@ export default function LoginScreen({ onLayoutRootView, navigation }) {
         <KeyboardAvoidingView
           style={styles.container}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 0}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : -200}
         >
           <ImageBackground style={styles.image} resizeMode="cover">
             <ScrollView
@@ -117,8 +117,8 @@ export default function LoginScreen({ onLayoutRootView, navigation }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  scroll: { flexGrow: 1, justifyContent: 'flex-end' },
-  image: { flex: 1, justifyContent: 'flex-end' },
+  scroll: { flexGrow: 1, justifyContent: 'center' },
+  image: { flex: 1, justifyContent: 'center' },
   input: {
     borderWidth: 1,
     borderColor: '#006400',
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   form: { marginHorizontal: 40, marginBottom: 120 },
   inputTitle: {
     color: '#006400',
-    marginBottom: 10,
+    marginBottom: 5,
     fontSize: 18,
     fontFamily: 'Montserrat-Regular',
   },
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderWidth: 1,
     height: 40,
-    marginTop: 40,
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 20,
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Montserrat-Regular',
   },
-  header: { alignItems: 'center', marginBottom: 60 },
+  header: { alignItems: 'center', marginBottom: 30 },
   headerTitle: {
     fontSize: 30,
     color: '#006400',
