@@ -6,18 +6,21 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
+import AddScreen from './screens/auth/mainGreenhouse/AddScreen';
+import AnalyticsScreen from './screens/auth/mainGreenhouse/AnalyticsScreen';
+import AutomationsScreen from './screens/auth/mainGreenhouse/AutomationsScreen';
+import HomeScreen from './screens/auth/mainGreenhouse/HomeScreen';
+import ProfileScreen from './screens/auth/mainGreenhouse/ProfileScreen';
+import SettingsScreen from './screens/auth/mainGreenhouse/SettingsScreen';
 import LoginScreen from './screens/auth/LoginScreen';
 import RegisterScreen from './screens/auth/RegisterScreen';
-import HomeScreen from './screens/auth/mainScreen/HomeScreen';
-import AnalyticsScreen from './screens/auth/mainScreen/AnalyticsScreen';
-import AutomationsScreen from './screens/auth/mainScreen/AutomationsScreen';
-import ProfileScreen from './screens/auth/mainScreen/ProfileScreen';
 
 //icon import
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export const useRoute = (isAuth, onLayoutRootView) => {
   if (!isAuth) {
@@ -46,6 +49,28 @@ export const useRoute = (isAuth, onLayoutRootView) => {
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <AntDesign name="home" size={size} color={color} />
+          ),
+        }}
+      />
+      <MainTab.Screen
+        name="Add"
+        component={AddScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <MaterialIcons
+              name="format-list-bulleted-add"
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <MainTab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <MaterialIcons name="settings-suggest" size={size} color={color} />
           ),
         }}
       />

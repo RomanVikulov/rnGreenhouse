@@ -25,7 +25,6 @@ export default function RegisterScreen({ onLayoutRootView, navigation }) {
 
   const keyboardHide = () => {
     Keyboard.dismiss();
-    console.log(state);
     setState(initialState);
   };
 

@@ -25,7 +25,6 @@ export default function LoginScreen({ onLayoutRootView, navigation }) {
 
   const keyboardHide = () => {
     Keyboard.dismiss();
-    console.log(state);
     setState(initialState);
   };
 
