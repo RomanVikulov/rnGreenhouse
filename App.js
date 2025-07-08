@@ -25,7 +25,7 @@ export default function App() {
     async function loadFonts() {
       try {
         await Font.loadAsync({
-          'Montserrat-Regular': require('./assets/fonts/Lora-Regular.ttf'),
+          'Lora-Regular': require('./assets/fonts/Lora-Regular.ttf'),
         });
       } catch (e) {
         console.warn(e);

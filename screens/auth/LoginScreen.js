@@ -11,7 +11,6 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   ScrollView,
-  Button,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -132,7 +131,7 @@ const styles = StyleSheet.create({
     color: '#006400',
     marginBottom: 5,
     fontSize: 18,
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Lora-Regular',
   },
   btn: {
     borderRadius: 6,
@@ -150,12 +149,12 @@ const styles = StyleSheet.create({
   btnTitle: {
     color: Platform.OS === 'ios' ? '#1e90ff' : '#ffffff',
     fontSize: 18,
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Lora-Regular',
   },
   header: { alignItems: 'center', marginBottom: 30 },
   headerTitle: {
     fontSize: 30,
     color: '#006400',
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Lora-Regular',
   },
 });

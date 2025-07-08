@@ -1,10 +1,13 @@
 import { View, Text, StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const AutomationsScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text>AutomationsScreen</Text>
-    </View>
+    <LinearGradient colors={['#22C1C3', '#FDBB2D']} style={styles.container}>
+      <View style={styles.container}>
+        <Text>AutomationsScreen</Text>
+      </View>
+    </LinearGradient>
   );
 };
 
