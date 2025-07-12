@@ -23,13 +23,13 @@ export default function LoginScreen({ onLayoutRootView, navigation }) {
   console.log('navigation', navigation);
   const [state, setState] = useState(initialState);
 
-  const keyboardHide = () => {
+  const handleSabmit = () => {
     Keyboard.dismiss();
     setState(initialState);
   };
 
   return (
-    <TouchableWithoutFeedback onPress={keyboardHide}>
+    <TouchableWithoutFeedback onPress={handleSabmit}>
       <LinearGradient
         colors={['#2A7B9B', '#57C785', '#EDDD53']}
         style={styles.container}
@@ -80,7 +80,7 @@ export default function LoginScreen({ onLayoutRootView, navigation }) {
                 <TouchableOpacity
                   activeOpacity={0.8}
                   style={styles.btn}
-                  onPress={keyboardHide}
+                  onPress={handleSabmit}
                 >
                   <Text style={styles.btnTitle}>SIGN IN</Text>
                 </TouchableOpacity>

@@ -12,7 +12,11 @@ import {
   TouchableWithoutFeedback,
   ScrollView,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
+
 import { LinearGradient } from 'expo-linear-gradient';
+
+import { authSignUpUser } from '../../redux/auth/authOperations';
 
 const initialState = {
   email: '',
@@ -23,13 +27,16 @@ const initialState = {
 export default function RegisterScreen({ onLayoutRootView, navigation }) {
   const [state, setState] = useState(initialState);
 
-  const keyboardHide = () => {
+  const dispatch = useDispatch();
+
+  const handleSabmit = () => {
     Keyboard.dismiss();
+    dispatch(authSignUpUser(state));
     setState(initialState);
   };
 
   return (
-    <TouchableWithoutFeedback onPress={keyboardHide}>
+    <TouchableWithoutFeedback onPress={handleSabmit}>
       <LinearGradient
         colors={['#2A7B9B', '#57C785', '#EDDD53']}
         style={styles.container}
@@ -95,7 +102,7 @@ export default function RegisterScreen({ onLayoutRootView, navigation }) {
                 <TouchableOpacity
                   activeOpacity={0.8}
                   style={styles.btn}
-                  onPress={keyboardHide}
+                  onPress={handleSabmit}
                 >
                   <Text style={styles.btnTitle}>SIGN IN</Text>
                 </TouchableOpacity>

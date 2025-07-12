@@ -4,9 +4,12 @@ import { View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 
+import { Provider } from 'react-redux';
+
 import { NavigationContainer } from '@react-navigation/native';
 
 import { useRoute } from './router';
+import { store } from './redux/store';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -19,7 +22,7 @@ export default function App() {
     }
   }, [fontsLoaded]);
 
-  const routing = useRoute(true, onLayoutRootView);
+  const routing = useRoute(false, onLayoutRootView);
 
   useEffect(() => {
     async function loadFonts() {
@@ -40,5 +43,9 @@ export default function App() {
     return <View style={{ flex: 1, backgroundColor: '#fff' }} />;
   }
 
-  return <NavigationContainer>{routing}</NavigationContainer>;
+  return (
+    <Provider store={store}>
+      <NavigationContainer>{routing}</NavigationContainer>
+    </Provider>
+  );
 }
